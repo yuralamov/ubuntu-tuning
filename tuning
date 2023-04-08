@@ -10,3 +10,4 @@ https://www.gnome-look.org/p/1408466 >>>>> ~/.icons/
 https://www.gnome-look.org/p/1405756 >>>>> ~/.local/share/icons/
 https://www.gnome-look.org/p/1403328 >>>>> ~/.local/share/themes/
 sudo apt-get purge apport
+sudo apt purge brltty
