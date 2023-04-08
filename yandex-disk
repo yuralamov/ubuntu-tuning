@@ -1,0 +1,7 @@
+wget http://repo.yandex.ru/yandex-disk/yandex-disk_latest_amd64.deb
+sudo apt-key list
+sudo apt-key export 7C90E5AF | sudo gpg --dearmour -o /etc/apt/keyrings/yandex-team.gpg
+sudo nano /etc/apt/sources.list.d/yandex-disk.list
+deb [signed-by=/etc/apt/keyrings/yandex-team.gpg] http://repo.yandex.ru/yandex-disk/deb/ stable main
+sudo apt-key del 7C90E5AF
+sudo apt update
