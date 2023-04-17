@@ -1,0 +1,7 @@
+sudo nano /etc/systemd/logind.conf
+HandleLidSwitch=ignore
+HandleLidSwitchDocked=ignore
+
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+sudo reboot
+sudo systemctl status sleep.target suspend.target hibernate.target hybrid-sleep.target
