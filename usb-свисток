@@ -1,2 +1,4 @@
 # Это с двумя рогами
 git clone https://github.com/cilynx/rtl88x2bu && cd rtl88x2bu/ && sudo ./deploy.sh
+# Это однорогий
+git clone https://github.com/morrownr/8821cu-20210916.git && cd 8821cu-20210916 && sudo apt install iw && sudo ./install-driver.sh
