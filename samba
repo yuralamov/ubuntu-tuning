@@ -1,0 +1,5 @@
+# В global
+# Для подключения к WindowsXP
+client min protocol = NT1
+# Для подключению из WindowsXP
+server min protocol = NT1
