@@ -1,0 +1,3 @@
+ssh yura@192.168.0.5 mkdir /home/yura/.ssh/
+ssh yura@192.168.0.5 sudo chmod 0700 /home/yura/.ssh
+scp C:\Users\yura\.ssh\id_ed25519.pub yura@192.168.0.5:/home/yura/.ssh/authorized_keys
