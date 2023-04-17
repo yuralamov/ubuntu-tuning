@@ -1,0 +1,6 @@
+sudo adduser kodi
+
+sudo apt install gdm3 language-pack-ru language-pack-gnome-ru ffmpeg ffmpegthumbnailer x264 x265 vlc -y
+cd src
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i --force-depends google-chrome-stable_current_amd64.deb && sudo apt update && sudo apt install -f && sudo apt upgrade -y
