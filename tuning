@@ -11,6 +11,7 @@ default-jre default-jdk filezilla meld libreoffice libusb-dev python3 python3-pi
 git wget curl samba hardinfo xsensors smartmontools speedtest-cli -y
 # Фичи в dconf-editor
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
+gsettings устанавливает org.gnome.shell.extensions.dash-to-dock show-apps-at-top true
 gsettings set org.gnome.gedit.preferences.encodings candidate-encodings "['UTF-8', 'WINDOWS-1251', 'KOI8-R', 'CURRENT', 'ISO-8859-15', 'UTF-16']"
 # В Extension Manager
 User Themes
