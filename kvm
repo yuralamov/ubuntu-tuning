@@ -12,3 +12,15 @@ sudo iptables -A ACCEPT_TCP_UDP -p tcp -j ACCEPT
 sudo iptables -A ACCEPT_TCP_UDP -p udp -j ACCEPT
 iptables -A zone_lan_forward -d 1.2.3.0/24 -j ACCEPT_TCP_UDP
 #
+####################
+# Proxy ARP
+sudo sysctl net.ipv4.conf.all.proxy_arp=1
+# IP Forwarding
+sudo sysctl net.ipv4.ip_forward=1
+# tap сетевой интерфейс от пользователя
+tunctl -p -t tap0 -u <username>
+# маршрут для ip адреса виртуалки через tap0
+ip route add 192.168.0.100 dev tap0
+# QEMU с параметрами сети
+-netdev tap,id=mynet0,ifname=tap0,script=no,downscript=no -device virtio-net-pci,netdev=mynet0
+# На гостевой системе статический ip адрес 192.168.0.100
