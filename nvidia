@@ -1,0 +1,16 @@
+lspci -vnn | grep -i VGA
+ubuntu-drivers devices
+####nvidia-driver-535 - distro non-free recommended
+sudo apt-get install nvidia-driver-535
+---
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt-get update
+sudo apt-get install nvidia-driver-545
+------
+wget https://developer.download.nvidia.com/compute/cuda/repos/$distro/$arch/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt -y install cuda
+----------
+https://docs.nvidia.com/cuda/cuda-installation-guide-linux/
+https://docs.nvidia.com/cuda/cuda-installation-guide-linux/#meta-packages
+https://docs.nvidia.com/cuda/cuda-installation-guide-linux/#switching-between-driver-module-flavors
