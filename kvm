@@ -1,3 +1,58 @@
+# Установк
+sudo apt install qemu-kvm qemu-system-x86 qemu-system libvirt-clients libvirt-daemon-system uml-utilities screen bridge-utils virtinst libvirt-daemon openssh-server
+sudo usermod -aG kvm $USER
+sudo usermod -aG libvirt $USER
+sudo usermod -aG libvirt-qemu $USER
+sudo usermod -aG sambashare $USER
+sudo systemctl status libvirtd
+sudo systemctl enable --now libvirtd
+# Настройка nat
+# На госте ip static
+sudo mkdir -p /etc/libvirt/hooks
+sudo chmod 700 /etc/libvirt/hooks
+sudo nano /etc/libvirt/hooks/qemu
+
+#!/bin/bash
+# used some from advanced script to have multiple ports: use an equal number of guest and host ports
+# Спасибо -- https://bozza.ru/art-268.html
+
+# Update the following variables to fit your setup
+Guest_name=win7
+Guest_ipaddr=192.168.122.142
+Host_ipaddr=192.168.0.4
+Host_port=(  '13389' '18042' )
+Guest_port=( '3389' '8042' )
+
+length=$(( ${#Host_port[@]} - 1 ))
+if [ "${1}" = "${Guest_name}" ]; then
+   if [ "${2}" = "stopped" ] || [ "${2}" = "reconnect" ]; then
+     for i in `seq 0 $length`; do
+        iptables -t nat -D PREROUTING -d ${Host_ipaddr} -p tcp --dport ${Host_port[$i]} -j DNAT --to ${Guest_ipaddr}:${Guest_port[$i]}
+        iptables -D FORWARD -d ${Guest_ipaddr}/32 -p tcp -m state --state NEW -m tcp --dport ${Guest_port[$i]} -j ACCEPT
+     done
+   fi
+   if [ "${2}" = "start" ] || [ "${2}" = "reconnect" ]; then
+     for i in `seq 0 $length`; do
+        iptables -t nat -A PREROUTING -d ${Host_ipaddr} -p tcp --dport ${Host_port[$i]} -j DNAT --to ${Guest_ipaddr}:${Guest_port[$i]}
+        iptables -I FORWARD -d ${Guest_ipaddr}/32 -p tcp -m state --state NEW -m tcp --dport ${Guest_port[$i]} -j ACCEPT
+     done
+   fi
+fi
+
+sudo chmod 700 /etc/libvirt/hooks/qemu
+sudo systemctl restart libvirtd.service
+sudo iptables -t nat -L -v -n
+
+#################
+# powershell Брандмайэр Windows
+New-NetFirewallRule -DisplayName "SQLServer default instance" -Direction Inbound -LocalPort 1433 -Protocol TCP -Action Allow
+New-NetFirewallRule -DisplayName "SQLServer Browser service" -Direction Inbound -LocalPort 1434 -Protocol UDP -Action Allow
+# или
+netsh firewall set portopening protocol = TCP port = 1433 name = SQLPort mode = ENABLE scope = SUBNET profile = CURRENT
+netsh advfirewall firewall add rule name = SQLPort dir = in protocol = tcp action = allow localport = 1433 remoteip = localsubnet profile = DOMAIN
+####################
+
+!!!!!Разобраться
 sudo nano /etc/sysctl.conf
 # Uncomment the next line to enable packet forwarding for IPv4
 net.ipv4.ip_forward=1
@@ -25,9 +80,4 @@ ip route add 192.168.0.100 dev tap0
 -netdev tap,id=mynet0,ifname=tap0,script=no,downscript=no -device virtio-net-pci,netdev=mynet0
 # На гостевой системе статический ip адрес 192.168.0.100
 ---------------------------------
-# powershell Брандмайэр Windows
-New-NetFirewallRule -DisplayName "SQLServer default instance" -Direction Inbound -LocalPort 1433 -Protocol TCP -Action Allow
-New-NetFirewallRule -DisplayName "SQLServer Browser service" -Direction Inbound -LocalPort 1434 -Protocol UDP -Action Allow
-# или
-netsh firewall set portopening protocol = TCP port = 1433 name = SQLPort mode = ENABLE scope = SUBNET profile = CURRENT
-netsh advfirewall firewall add rule name = SQLPort dir = in protocol = tcp action = allow localport = 1433 remoteip = localsubnet profile = DOMAIN
+
