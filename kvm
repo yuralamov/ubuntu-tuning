@@ -61,7 +61,7 @@ virsh vol-delete /var/lib/libvirt/images/VM.qcow2
 virsh domstate VM
 virsh define /mnt/backup-kvm/VM.xml
 virsh list -all
-cp /mnt/backup-kvm/VM.qcow2  //var/lib/libvirt/images/
+sudo cp /mnt/backup-kvm/VM.qcow2  /var/lib/libvirt/images/
 
 ####################
 !!!!!Разобраться
