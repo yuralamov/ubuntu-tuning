@@ -56,12 +56,12 @@ netsh advfirewall firewall add rule name = SQLPort dir = in protocol = tcp actio
 virsh list
 virsh dumpxml VM > /mnt/backup-kvm/VM.xml
 virsh shutdown VM
-cp /var/lib/lbvirt/VM.qcow2 /mnt/backup-kvm/
-virsh vol-delete /var/lib/lbvirt/VM.qcow2
+cp /var/lib/libvirt/images/VM.qcow2 /mnt/backup-kvm/
+virsh vol-delete /var/lib/libvirt/images/VM.qcow2
 virsh domstate VM
 virsh define /mnt/backup-kvm/VM.xml
 virsh list -all
-cp /mnt/backup-kvm/VM.qcow2  /var/lib/lbvirt/
+cp /mnt/backup-kvm/VM.qcow2  //var/lib/libvirt/images/
 
 ####################
 !!!!!Разобраться
