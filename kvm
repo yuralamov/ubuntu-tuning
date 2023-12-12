@@ -57,11 +57,13 @@ virsh list
 virsh dumpxml VM > /mnt/backup-kvm/VM.xml
 virsh shutdown VM
 cp /var/lib/libvirt/images/VM.qcow2 /mnt/backup-kvm/
+dd -if=/var/lib/libvirt/images/VM.qcow2 | gzip -kc -3 > /mnt/backup-kvm/VM.qcow2.gz
 virsh vol-delete /var/lib/libvirt/images/VM.qcow2
 virsh domstate VM
 virsh define /mnt/backup-kvm/VM.xml
 virsh list -all
 sudo cp /mnt/backup-kvm/VM.qcow2  /var/lib/libvirt/images/
+
 
 ####################
 !!!!!Разобраться
