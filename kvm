@@ -51,7 +51,19 @@ New-NetFirewallRule -DisplayName "SQLServer Browser service" -Direction Inbound 
 netsh firewall set portopening protocol = TCP port = 1433 name = SQLPort mode = ENABLE scope = SUBNET profile = CURRENT
 netsh advfirewall firewall add rule name = SQLPort dir = in protocol = tcp action = allow localport = 1433 remoteip = localsubnet profile = DOMAIN
 ####################
+####################
+# Бэкап
+virsh list
+virsh dumpxml VM > /mnt/backup-kvm/VM.xml
+virsh shutdown VM
+cp /var/lib/lbvirt/VM.qcow2 /mnt/backup-kvm/
+virsh vol-delete /var/lib/lbvirt/VM.qcow2
+virsh domstate VM
+virsh define /mnt/backup-kvm/VM.xml
+virsh list -all
+cp /mnt/backup-kvm/VM.qcow2  /var/lib/lbvirt/
 
+####################
 !!!!!Разобраться
 sudo nano /etc/sysctl.conf
 # Uncomment the next line to enable packet forwarding for IPv4
