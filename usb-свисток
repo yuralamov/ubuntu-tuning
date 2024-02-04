@@ -2,3 +2,8 @@
 git clone https://github.com/cilynx/rtl88x2bu && cd rtl88x2bu/ && sudo ./deploy.sh
 # Это однорогий
 git clone https://github.com/morrownr/8821au-20210708.git && cd 8821au-20210708 && sudo apt install iw rfkill && sudo ./install-driver.sh
+# Дебильный wifi на hp pavilion dv6
+# 03:00.0 Network controller: Broadcom Inc. and subsidiaries BCM4313 802.11bgn Wireless Network Adapter (rev 01)
+echo "blacklist b43" | sudo tee -a /etc/modprobe.d/blacklist.conf
+echo "blacklist ssb" | sudo tee -a /etc/modprobe.d/blacklist.conf
+sudo apt install bcmwl-kernel-source
