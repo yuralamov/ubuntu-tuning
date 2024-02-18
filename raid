@@ -60,12 +60,10 @@ lvcreate -i2 -I64 -l 100%FREE -n lv_root vg01 /dev/sdb /dev/sdc
 # Делаем разделы для кэша
 lvcreate -L 16G -n lv_meta vg01 /dev/sda3
 lvcreate -l 90%FREE -n lv_data vg01 /dev/sda3
-# Тут я перезагрузился
 # Конвертируем разделы
 lvconvert --type cache-pool --poolmetadata vg01/lv_meta vg01/lv_data
 # Собираем кэш
 lvconvert --type cache --cachemode writeback --cachepool vg01/lv_data vg01/lv_root
-# Тут я опять перегрузил и проверил
 lvs -a
 # Далле установка как полагается /dev/sda1 - efi, /dev/sda2 - boot, vg01-lv_data - root
 # Загрузка /dev/sda
