@@ -57,7 +57,7 @@ pvcreate /dev/sdb
 pvcreate /dev/sdc
 vgcreate vg01 /dev/sda3 /dev/sdb /dev/sdc
 # Создаем raid0
-lvcreate -i2 -I64 -l 100%FREE -n lv_root vg01 /dev/sdb /dev/sdc
+lvcreate -i2 -I64 -l 90%FREE -n lv_root vg01 /dev/sdb /dev/sdc
 # Делаем разделы для кэша
 lvcreate -L 16G -n lv_meta vg01 /dev/sda3
 # Не надо 100%, весь забъется и тормоза
