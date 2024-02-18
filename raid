@@ -45,7 +45,7 @@ sudo lvdisplay
 
 ## Продолжение LVM с кэшированием
 # /dev/sdb, /dev/sdc - hdd для raid0
-# /dev/sda - ssd для кэша ЗАПИСИ на raid0 (у меня 120G серверный INTEL)
+# /dev/sda - ssd для кэша ЗАПИСИ на raid0
 # Все делаем из root (sudo su)
 # Инициализируем диски
 wipefs --all --force /dev/sd{a,b,c}
