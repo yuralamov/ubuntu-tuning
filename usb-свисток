@@ -1,5 +1,6 @@
 # Это с двумя рогами
 git clone https://github.com/cilynx/rtl88x2bu && cd rtl88x2bu/ && sudo ./deploy.sh
+echo "blacklist rtw88_8822bu" | sudo tee /etc/modprobe.d/rtw8822bu.conf
 # Это однорогий
 git clone https://github.com/morrownr/8821au-20210708.git && cd 8821au-20210708 && sudo apt install iw rfkill && sudo ./install-driver.sh
 # Дебильный wifi на hp pavilion dv6
