@@ -21,7 +21,7 @@ Logo Menu
 https://www.gnome-look.org/p/1408466 >>>>> ~/.icons/
 https://www.gnome-look.org/p/1405756 >>>>> ~/.local/share/icons/
 https://www.gnome-look.org/p/1403328 >>>>> ~/.local/share/themes/
-https://github.com/manishprivet/dynamic-gnome-wallpapers#credits
+curl -s https://wallpapers.manishk.dev/install.sh | bash -s Catalina
 # Обрубить постоянную отправку оо ошибках
 sudo apt-get purge apport
 # Это мешает драйверу arduino
