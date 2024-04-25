@@ -1,14 +1,12 @@
 # Обновление snap
 sudo snap refresh
 # Программы из репа
-sudo apt install chrome-gnome-shell gnome-shell-extension-prefs gnome-shell-extension-manager gnome-tweaks dconf-editor \
-flameshot peek vlc ffmpeg \
-unace arj cabextract alien unzip unrar p7zip  p7zip-full p7zip-rar \
-aptitude synaptic gdebi \
+sudo apt install gnome-shell-extension-manager gnome-tweaks dconf-editor flameshot peek vlc ffmpeg \
+unace arj cabextract alien unzip unrar p7zip  p7zip-full p7zip-rar aptitude synaptic gdebi \
 nautilus-admin exe-thumbnailer ubuntu-restricted-extras preload lynx mc ssh htop iftop nmon bashtop \
 apt-transport-https ca-certificates gnupg-agent software-properties-common make net-tools gparted \
 default-jre default-jdk filezilla meld libreoffice libusb-dev python3 python3-pip perl dkms build-essential gdb \
-git wget curl samba hardinfo xsensors smartmontools speedtest-cli ffmpegthumbnailer -y
+git wget curl samba winbind cifs-utils hardinfo xsensors smartmontools speedtest-cli ffmpegthumbnailer -y
 # Фичи в dconf-editor
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true
