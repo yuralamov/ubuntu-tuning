@@ -26,3 +26,10 @@ sudo apt-get purge apport
 sudo apt purge brltty
 # Сохранение настроек в NVidia X-Server Settings
 sudo chmod +x /usr/share/screen-resolution-extra/nvidia-polkit
+# Сертификаты минцифры
+sudo su -
+mkdir -p /usr/local/share/ca-certificates/russian_trusted
+wget https://gu-st.ru/content/Other/doc/russian_trusted_root_ca.cer
+wget https://gu-st.ru/content/Other/doc/russian_trusted_sub_ca.cer
+update-ca-certificates -v
+exit
